@@ -19,7 +19,8 @@ class StartupScreen:
         
     def clear_screen(self):
         """Clear the console screen"""
-        os.system('cls' if os.name == 'nt' else 'clear')
+        # Using print with newlines is safer than os.system
+        print('\n' * 100)
         
     def display_banner(self):
         """Display the game banner"""

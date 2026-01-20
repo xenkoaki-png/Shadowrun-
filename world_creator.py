@@ -112,17 +112,25 @@ class WorldCreator:
     
     def save_world(self, world_data, filename=None):
         """Save world data to JSON file"""
-        if not os.path.exists('saves'):
-            os.makedirs('saves')
+        try:
+            if not os.path.exists('saves'):
+                os.makedirs('saves')
+        except OSError as e:
+            print(f"\nError creating saves directory: {e}")
+            return None
         
         if filename is None:
             filename = f"saves/{world_data['name'].replace(' ', '_')}.json"
         
-        with open(filename, 'w') as f:
-            json.dump(world_data, f, indent=2)
-        
-        print(f"\nWorld saved to {filename}")
-        return filename
+        try:
+            with open(filename, 'w') as f:
+                json.dump(world_data, f, indent=2)
+            
+            print(f"\nWorld saved to {filename}")
+            return filename
+        except (OSError, IOError) as e:
+            print(f"\nError saving world: {e}")
+            return None
     
     def load_world(self, filename):
         """Load world data from JSON file"""

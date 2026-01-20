@@ -9,6 +9,15 @@ from datetime import datetime
 class CharacterCreator:
     """Handles creation of Shadowrun characters"""
     
+    # Class-level constants for skills
+    AVAILABLE_SKILLS = [
+        "Firearms", "Close Combat", "Athletics",
+        "Hacking", "Electronics", "Software",
+        "Sorcery", "Conjuring", "Astral Combat",
+        "Stealth", "Perception", "Negotiation",
+        "Driving", "Pilot", "Gunnery"
+    ]
+    
     def __init__(self):
         self.character_data = {}
         
@@ -92,25 +101,18 @@ class CharacterCreator:
         
         # Skills (simplified)
         print("\nPrimary Skills (select 3):")
-        skill_list = [
-            "Firearms", "Close Combat", "Athletics",
-            "Hacking", "Electronics", "Software",
-            "Sorcery", "Conjuring", "Astral Combat",
-            "Stealth", "Perception", "Negotiation",
-            "Driving", "Pilot", "Gunnery"
-        ]
         
-        for i, skill in enumerate(skill_list, 1):
+        for i, skill in enumerate(self.AVAILABLE_SKILLS, 1):
             print(f"{i}. {skill}")
         
         skills = []
         for i in range(3):
             while True:
                 try:
-                    choice = input(f"\nSelect skill #{i+1} (1-{len(skill_list)}): ").strip()
+                    choice = input(f"\nSelect skill #{i+1} (1-{len(self.AVAILABLE_SKILLS)}): ").strip()
                     choice = int(choice) - 1
-                    if 0 <= choice < len(skill_list):
-                        skill = skill_list[choice]
+                    if 0 <= choice < len(self.AVAILABLE_SKILLS):
+                        skill = self.AVAILABLE_SKILLS[choice]
                         if skill not in skills:
                             skills.append(skill)
                             break
@@ -141,7 +143,7 @@ class CharacterCreator:
         print(f"Archetype: {archetype}")
         print(f"Attributes: {attributes}")
         print(f"Skills: {', '.join(skills)}")
-        print(f"Starting Nuyen: {self.character_data['nuyen']}")
+        print(f"Starting Nuyen: {self.character_data['nuyen']} NY")
         print("-" * 60)
         
         return self.character_data
@@ -158,7 +160,7 @@ class CharacterCreator:
             print(f"  {attr}: {value}")
         print(f"\nSkills: {', '.join(character_data['skills'])}")
         print(f"\nKarma: {character_data['karma']}")
-        print(f"Nuyen: {character_data['nuyen']}¥")
+        print(f"Nuyen: {character_data['nuyen']} NY")
         if character_data['background']:
             print(f"\nBackground: {character_data['background']}")
         print("=" * 60)

@@ -5,6 +5,7 @@ Basic test script for Shadowrun modules
 
 import sys
 import os
+import tempfile
 
 def test_imports():
     """Test that all modules can be imported"""
@@ -38,17 +39,20 @@ def test_world_creator():
             "characters": []
         }
         
-        # Test save functionality
-        wc.save_world(wc.world_data, "/tmp/test_world.json")
+        # Test save functionality using cross-platform temp file
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp_file:
+            tmp_filename = tmp_file.name
+        
+        wc.save_world(wc.world_data, tmp_filename)
         
         # Test load functionality
-        loaded = wc.load_world("/tmp/test_world.json")
+        loaded = wc.load_world(tmp_filename)
         
         assert loaded["name"] == "Test World"
         assert loaded["year"] == 2070
         
         # Cleanup
-        os.remove("/tmp/test_world.json")
+        os.remove(tmp_filename)
         
         print("✓ WorldCreator tests passed")
         return True
