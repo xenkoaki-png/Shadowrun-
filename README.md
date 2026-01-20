@@ -43,8 +43,11 @@ python main.py
 
 ## Controls
 
-- **Arrow Keys / WASD**: Move in cardinal directions
-- **Q/E/Z/C**: Diagonal movement
+- **Arrow Keys / WASD**: Move in cardinal directions (up, down, left, right)
+- **Q**: Move diagonally up-left
+- **E**: Move diagonally up-right
+- **Z**: Move diagonally down-left
+- **C**: Move diagonally down-right
 - **ESC**: Quit game
 
 ## Project Structure
