@@ -28,7 +28,9 @@ def list_saved_characters():
                 char['world_file'] = world_file
                 char['world_name'] = world['name']
                 all_characters.append(char)
-        except:
+        except (FileNotFoundError, ValueError, IOError, KeyError) as e:
+            # Skip worlds that can't be loaded
+            print(f"Warning: Could not load {world_file}: {e}")
             continue
     
     return all_characters

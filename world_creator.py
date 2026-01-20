@@ -134,9 +134,16 @@ class WorldCreator:
     
     def load_world(self, filename):
         """Load world data from JSON file"""
-        with open(filename, 'r') as f:
-            self.world_data = json.load(f)
-        return self.world_data
+        try:
+            with open(filename, 'r') as f:
+                self.world_data = json.load(f)
+            return self.world_data
+        except FileNotFoundError:
+            raise FileNotFoundError(f"World file not found: {filename}")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid world file format: {e}")
+        except (OSError, IOError) as e:
+            raise IOError(f"Error reading world file: {e}")
     
     def list_saved_worlds(self):
         """List all saved worlds"""
