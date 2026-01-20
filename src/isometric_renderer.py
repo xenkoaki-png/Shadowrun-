@@ -3,7 +3,6 @@ Isometric renderer - handles rendering of isometric grid and entities
 """
 
 import pygame
-import math
 
 
 class IsometricRenderer:
