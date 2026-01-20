@@ -76,12 +76,13 @@ class Game:
         controls_font = pygame.font.Font(None, 20)
         controls = [
             "Controls:",
-            "Arrow Keys / WASD - Move",
+            "Arrow Keys / WASD - Cardinal movement",
+            "Q/E/Z/C - Diagonal movement",
             "ESC - Quit"
         ]
         for i, line in enumerate(controls):
             text = controls_font.render(line, True, (150, 150, 150))
-            self.screen.blit(text, (10, self.screen_height - 80 + i * 20))
+            self.screen.blit(text, (10, self.screen_height - 90 + i * 20))
     
     def run(self):
         """Main game loop"""

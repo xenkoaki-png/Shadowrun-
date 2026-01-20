@@ -24,10 +24,10 @@ def test_tile_creation():
     assert tile.y == 5
     assert tile.tile_type == 'floor'
     assert tile.height == 0
-    assert tile.walkable == True
+    assert tile.walkable is True
     
     wall = Tile(0, 0, 'wall', 1)
-    assert wall.walkable == False
+    assert wall.walkable is False
     print("✓ Tile creation test passed")
 
 
@@ -58,7 +58,7 @@ def test_player_movement():
     
     # Move right
     result = player.move(1, 0, world)
-    assert result == True
+    assert result is True
     assert player.x == 6
     assert player.y == 5
     
@@ -66,7 +66,7 @@ def test_player_movement():
     player.x = 1
     player.y = 1
     result = player.move(-1, 0, world)
-    assert result == False
+    assert result is False
     assert player.x == 1  # Should not have moved
     print("✓ Player movement test passed")
 
