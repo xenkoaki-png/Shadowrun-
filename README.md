@@ -52,6 +52,20 @@ pip install -r requirements.txt
 
 ## Running the Game
 
+### Integrated Game (Recommended)
+
+The integrated game allows you to create characters in the CLI and then play them in the isometric game:
+
+```bash
+python3 integrated_game.py
+```
+
+This will:
+1. List all saved characters from your worlds
+2. Allow you to select a character to play
+3. Load that character into the isometric game with their stats and skills
+4. Start the isometric game
+
 ### CLI Character & World Creation
 
 To start the CLI interface for creating and managing worlds and characters:
@@ -60,9 +74,9 @@ To start the CLI interface for creating and managing worlds and characters:
 python3 shadowrun.py
 ```
 
-### Isometric Game
+### Isometric Game (Standalone)
 
-To start the isometric grid game:
+To start the isometric grid game with a default character:
 
 ```bash
 python main.py
@@ -103,11 +117,13 @@ python main.py
 
 ```
 Shadowrun-/
+├── integrated_game.py     # Integrated game (load CLI chars into isometric)
 ├── main.py                 # Isometric game entry point
 ├── shadowrun.py           # CLI entry point
 ├── startup_screen.py      # CLI main menu and UI
 ├── world_creator.py       # World creation logic
 ├── character_creator.py   # Character creation logic
+├── demo.py                # Demo script for isometric game
 ├── requirements.txt       # Python dependencies
 ├── README.md             # This file
 ├── src/                  # Isometric game modules
@@ -117,6 +133,9 @@ Shadowrun-/
 │   ├── world.py           # World and tile management
 │   ├── player.py          # Player character
 │   └── input_handler.py   # Input processing
+├── tests/                # Test suite
+│   └── test_game.py      # Isometric game tests
+├── test_shadowrun.py     # CLI tests
 └── saves/                # Saved world files (created on first save)
 ```
 
@@ -141,6 +160,15 @@ The game world is represented as an isometric grid where each tile can be:
 - **Wall**: Impassable obstacles
 - Different tile types can be added for varied gameplay
 
+### Integration
+
+The `integrated_game.py` script bridges the CLI character creation and isometric game:
+- Load saved characters from JSON files
+- Map CLI attributes to game stats
+- Transfer character name, stats, skills, and money
+- Calculate health based on Body attribute
+- Apply skill bonuses to game mechanics
+
 ## Development
 
 ### Adding New Features
@@ -157,7 +185,7 @@ The modular architecture makes it easy to extend:
 - [x] CLI Character and world creation
 - [x] Save/load system
 - [x] Isometric grid rendering
-- [ ] Integration between CLI and isometric game (load created characters into game)
+- [x] Integration between CLI and isometric game (load created characters into game)
 - [ ] Item system and inventory management
 - [ ] NPC characters and AI
 - [ ] Combat system (ranged and melee)
